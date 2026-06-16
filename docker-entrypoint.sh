@@ -7,7 +7,7 @@ DB_USER="${MYSQLUSER:-${MYSQL_USER:-${DB_USER:-root}}}"
 DB_PASS="${MYSQLPASSWORD:-${MYSQL_PASSWORD:-${DB_PASS:-}}}"
 DB_PORT="${MYSQLPORT:-${MYSQL_PORT:-${DB_PORT:-3306}}}"
 cat > /var/www/html/.env << EOF
-CI_ENVIRONMENT = development
+CI_ENVIRONMENT = production
 
 app.baseURL = '${APP_BASE_URL:-http://localhost/}'
 app.forceGlobalSecureRequests = false
