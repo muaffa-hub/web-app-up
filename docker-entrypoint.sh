@@ -39,6 +39,9 @@ EOF
 echo "Running migrations..."
 php /var/www/html/spark migrate --all -n || true
 
+echo "Running seeder..."
+php /var/www/html/spark db:seed InitSeeder -n || true
+
 echo "Starting PHP-FPM..."
 php-fpm &
 

@@ -8,15 +8,19 @@ class InitSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->db->table('users')->insert([
-            'nama'              => 'Admin UP',
-            'email'             => 'admin@up.sekolah.com',
-            'password'          => password_hash('password', PASSWORD_DEFAULT),
-            'role'              => 'admin',
-            'created_at'        => date('Y-m-d H:i:s'),
-            'updated_at'        => date('Y-m-d H:i:s'),
-        ]);
+        $adminExists = $this->db->table('users')->where('email', 'admin@up.sekolah.com')->countAllResults() > 0;
+        if (! $adminExists) {
+            $this->db->table('users')->insert([
+                'nama'              => 'Admin UP',
+                'email'             => 'admin@up.sekolah.com',
+                'password'          => password_hash('password', PASSWORD_DEFAULT),
+                'role'              => 'admin',
+                'created_at'        => date('Y-m-d H:i:s'),
+                'updated_at'        => date('Y-m-d H:i:s'),
+            ]);
+        }
 
+        if ($this->db->table('print_pricing')->countAllResults() === 0) {
         $pricingData = [
             ['jenis_kertas' => 'HVS 70gr', 'warna_opsi' => 'hitam_putih', 'harga_per_halaman' => 500],
             ['jenis_kertas' => 'HVS 70gr', 'warna_opsi' => 'berwarna',    'harga_per_halaman' => 1500],
@@ -31,11 +35,15 @@ class InitSeeder extends Seeder
         foreach ($pricingData as $item) {
             $this->db->table('print_pricing')->insert($item);
         }
+        }
 
-        $this->db->table('categories')->insert([
-            'nama_kategori' => 'Umum',
-            'slug'          => 'umum',
-            'is_active'     => 1,
-        ]);
+        $kategoriExists = $this->db->table('categories')->where('slug', 'umum')->countAllResults() > 0;
+        if (! $kategoriExists) {
+            $this->db->table('categories')->insert([
+                'nama_kategori' => 'Umum',
+                'slug'          => 'umum',
+                'is_active'     => 1,
+            ]);
+        }
     }
 }
