@@ -1,6 +1,7 @@
-FROM php:8.2-apache
+FROM php:8.2-fpm
 
 RUN apt-get update && apt-get install -y \
+    nginx \
     libicu-dev \
     libzip-dev \
     libonig-dev \
@@ -9,18 +10,24 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install intl mbstring mysqli pdo pdo_mysql zip \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN rm -f /etc/apache2/mods-enabled/mpm_*.conf /etc/apache2/mods-enabled/mpm_*.load \
-    && a2enmod mpm_prefork rewrite
-
 RUN { \
-    echo '<VirtualHost *:80>'; \
-    echo '    DocumentRoot /var/www/html/public'; \
-    echo '    <Directory /var/www/html/public>'; \
-    echo '        AllowOverride All'; \
-    echo '        Require all granted'; \
-    echo '    </Directory>'; \
-    echo '</VirtualHost>'; \
-} > /etc/apache2/sites-available/000-default.conf
+    echo 'server {'; \
+    echo '    listen 80;'; \
+    echo '    server_name _;'; \
+    echo '    root /var/www/html/public;'; \
+    echo '    index index.php;'; \
+    echo '    location / {'; \
+    echo '        try_files $uri $uri/ /index.php$is_args$args;'; \
+    echo '    }'; \
+    echo '    location ~ \.php$ {'; \
+    echo '        fastcgi_pass 127.0.0.1:9000;'; \
+    echo '        fastcgi_index index.php;'; \
+    echo '        include fastcgi_params;'; \
+    echo '        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;'; \
+    echo '    }'; \
+    echo '    location ~ /\.ht { deny all; }'; \
+    echo '}'; \
+} > /etc/nginx/sites-available/default
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
@@ -31,7 +38,8 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 RUN mkdir -p writable/cache writable/logs writable/session writable/uploads \
-    && chmod -R 777 writable/
+    && chmod -R 777 writable/ \
+    && chown -R www-data:www-data .
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
@@ -39,4 +47,4 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 EXPOSE 80
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["apache2-foreground"]
+CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
