@@ -39,9 +39,12 @@ class PasswordController extends BaseController
                 $emailService->setSubject('Reset Password - Unit Produksi Sekolah');
                 $emailService->setMessage(view('emails/reset_password', ['resetUrl' => $resetUrl]));
                 $emailService->setMailType('html');
-                $emailService->send();
-            } catch (\Exception $e) {
-                log_message('error', 'Failed to send reset email: ' . $e->getMessage());
+
+                if (!$emailService->send(false)) {
+                    log_message('error', 'Failed to send reset email to ' . $email . ': ' . $emailService->printDebugger(['headers']));
+                }
+            } catch (\Throwable $e) {
+                log_message('error', 'Reset email exception for ' . $email . ': ' . $e->getMessage());
             }
         }
 

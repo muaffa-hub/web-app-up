@@ -100,6 +100,7 @@
 
 <div class="text-center mt-4 no-print">
     <button onclick="window.print()" class="bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700">Print Invoice</button>
+    <a href="<?= base_url('/') ?>" class="ml-4 text-orange-600 hover:underline">Kembali ke Beranda</a>
     <a href="javascript:history.back()" class="ml-4 text-gray-500 hover:text-gray-700">Kembali</a>
 </div>
 </body>

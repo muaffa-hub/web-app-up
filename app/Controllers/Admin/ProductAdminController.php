@@ -151,6 +151,9 @@ class ProductAdminController extends BaseController
         $imageModel = new ProductImageModel();
         $urutan     = (int)$this->db->table('product_images')->where('product_id', $productId)->countAllResults();
 
+        $savePath = WRITEPATH . 'uploads/products/';
+        if (!is_dir($savePath)) mkdir($savePath, 0777, true);
+
         foreach ($files as $file) {
             if (!$file->isValid() || $file->hasMoved()) continue;
 
@@ -159,7 +162,7 @@ class ProductAdminController extends BaseController
             if ($file->getSize() > 5 * 1024 * 1024) continue;
 
             $newName = bin2hex(random_bytes(16)) . '.' . $file->getClientExtension();
-            $file->move(WRITEPATH . 'uploads/products/', $newName);
+            $file->move($savePath, $newName);
             $imageModel->insert([
                 'product_id' => $productId,
                 'file_path'  => $newName,
