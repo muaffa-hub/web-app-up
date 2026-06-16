@@ -1,18 +1,27 @@
 #!/bin/bash
 set -e
 
+DB_HOST="${MYSQLHOST:-${DB_HOST:-127.0.0.1}}"
+DB_NAME="${MYSQLDATABASE:-${MYSQL_DATABASE:-${DB_NAME:-railway}}}"
+DB_USER="${MYSQLUSER:-${MYSQL_USER:-${DB_USER:-root}}}"
+DB_PASS="${MYSQLPASSWORD:-${MYSQL_PASSWORD:-${DB_PASS:-}}}"
+DB_PORT="${MYSQLPORT:-${MYSQL_PORT:-${DB_PORT:-3306}}}"
+APP_PORT="${PORT:-80}"
+
+sed -i "s/listen 80;/listen ${APP_PORT};/" /etc/nginx/sites-available/default
+
 cat > /var/www/html/.env << EOF
 CI_ENVIRONMENT = production
 
-app.baseURL = '${APP_BASE_URL:-https://your-app.railway.app/}'
+app.baseURL = '${APP_BASE_URL:-http://localhost/}'
 app.forceGlobalSecureRequests = false
 
-database.default.hostname = ${DB_HOST:-127.0.0.1}
-database.default.database = ${DB_NAME:-ecommerce_up}
-database.default.username = ${DB_USER:-root}
-database.default.password = ${DB_PASS:-}
+database.default.hostname = ${DB_HOST}
+database.default.database = ${DB_NAME}
+database.default.username = ${DB_USER}
+database.default.password = ${DB_PASS}
 database.default.DBDriver = MySQLi
-database.default.port = ${DB_PORT:-3306}
+database.default.port = ${DB_PORT}
 
 session.driver = 'CodeIgniter\Session\Handlers\DatabaseHandler'
 session.savePath = ci_sessions
