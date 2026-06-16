@@ -1,6 +1,10 @@
 ﻿<?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 <div class="max-w-5xl mx-auto">
+    <a href="<?= base_url('/catalog') ?>" class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-orange-600 mb-4 transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Kembali ke Katalog
+    </a>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-xl border border-gray-200 p-6">
         <div>
             <?php if (!empty($product['images'])): ?>
