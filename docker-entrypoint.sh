@@ -11,7 +11,7 @@ APP_PORT="${PORT:-80}"
 sed -i "s/listen 80;/listen ${APP_PORT};/" /etc/nginx/sites-available/default
 
 cat > /var/www/html/.env << EOF
-CI_ENVIRONMENT = production
+CI_ENVIRONMENT = development
 
 app.baseURL = '${APP_BASE_URL:-http://localhost/}'
 app.forceGlobalSecureRequests = false
