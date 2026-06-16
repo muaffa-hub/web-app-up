@@ -20,8 +20,11 @@ RUN mkdir -p /var/run/php && chown www-data:www-data /var/run/php \
         echo 'listen.mode = 0660'; \
     } > /usr/local/etc/php-fpm.d/zzz-custom.conf
 
-RUN rm -f /etc/nginx/sites-enabled/default 2>/dev/null; \
-    { \
+RUN rm -f /etc/nginx/sites-enabled/default \
+       /etc/nginx/sites-available/default \
+       /etc/nginx/conf.d/default.conf 2>/dev/null || true
+
+RUN { \
         echo 'server {'; \
         echo '    listen 80;'; \
         echo '    server_name _;'; \

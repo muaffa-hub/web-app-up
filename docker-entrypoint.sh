@@ -6,10 +6,6 @@ DB_NAME="${MYSQLDATABASE:-${MYSQL_DATABASE:-${DB_NAME:-railway}}}"
 DB_USER="${MYSQLUSER:-${MYSQL_USER:-${DB_USER:-root}}}"
 DB_PASS="${MYSQLPASSWORD:-${MYSQL_PASSWORD:-${DB_PASS:-}}}"
 DB_PORT="${MYSQLPORT:-${MYSQL_PORT:-${DB_PORT:-3306}}}"
-APP_PORT="${PORT:-80}"
-
-sed -i "s/listen 80;/listen ${APP_PORT};/" /etc/nginx/conf.d/app.conf
-
 cat > /var/www/html/.env << EOF
 CI_ENVIRONMENT = development
 
@@ -52,5 +48,5 @@ until [ -S /var/run/php/php-fpm.sock ]; do
 done
 echo "PHP-FPM ready."
 
-echo "Starting Nginx on port ${APP_PORT}..."
+echo "Starting Nginx on port 80..."
 exec nginx -g 'daemon off;'
