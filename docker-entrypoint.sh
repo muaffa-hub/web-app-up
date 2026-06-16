@@ -36,6 +36,13 @@ email.SMTPCrypto = tls
 email.protocol = smtp
 EOF
 
+echo "Preparing upload directories..."
+mkdir -p /var/www/html/writable/uploads/products \
+         /var/www/html/writable/uploads/content \
+         /var/www/html/writable/uploads/designs
+chmod -R 777 /var/www/html/writable/uploads
+chown -R www-data:www-data /var/www/html/writable
+
 echo "Running migrations..."
 php /var/www/html/spark migrate --all -n || true
 

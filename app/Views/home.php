@@ -220,7 +220,7 @@
                class="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md hover:border-orange-200 transition-all duration-200">
                 <div class="w-full aspect-square bg-gray-100 overflow-hidden">
                     <?php if (!empty($p['foto_utama'])): ?>
-                        <img src="<?= base_url('product-image/img/' . esc($p['id'])) ?>"
+                        <img src="<?= base_url('product-image/' . esc($p['id'])) ?>"
                              alt="<?= esc($p['nama_produk']) ?>"
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out">
                     <?php else: ?>
