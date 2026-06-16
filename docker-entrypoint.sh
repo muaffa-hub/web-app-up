@@ -8,7 +8,7 @@ DB_PASS="${MYSQLPASSWORD:-${MYSQL_PASSWORD:-${DB_PASS:-}}}"
 DB_PORT="${MYSQLPORT:-${MYSQL_PORT:-${DB_PORT:-3306}}}"
 APP_PORT="${PORT:-80}"
 
-sed -i "s/listen 80;/listen ${APP_PORT};/" /etc/nginx/sites-available/default
+sed -i "s/listen 80;/listen ${APP_PORT};/" /etc/nginx/conf.d/app.conf
 
 cat > /var/www/html/.env << EOF
 CI_ENVIRONMENT = development
@@ -46,11 +46,11 @@ php /var/www/html/spark migrate --all -n || true
 echo "Starting PHP-FPM..."
 php-fpm &
 
-echo "Waiting for PHP-FPM to be ready..."
-until nc -z 127.0.0.1 9000; do
+echo "Waiting for PHP-FPM socket..."
+until [ -S /var/run/php/php-fpm.sock ]; do
     sleep 0.2
 done
 echo "PHP-FPM ready."
 
-echo "Starting Nginx..."
+echo "Starting Nginx on port ${APP_PORT}..."
 exec nginx -g 'daemon off;'
