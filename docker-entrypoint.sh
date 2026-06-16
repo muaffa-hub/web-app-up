@@ -7,7 +7,7 @@ CI_ENVIRONMENT = production
 app.baseURL = '${APP_BASE_URL:-https://your-app.railway.app/}'
 app.forceGlobalSecureRequests = false
 
-database.default.hostname = ${DB_HOST:-localhost}
+database.default.hostname = ${DB_HOST:-127.0.0.1}
 database.default.database = ${DB_NAME:-ecommerce_up}
 database.default.username = ${DB_USER:-root}
 database.default.password = ${DB_PASS:-}
