@@ -1,6 +1,10 @@
 ﻿<?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 <div class="max-w-7xl mx-auto">
+    <a href="<?= base_url('/') ?>" class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-orange-600 mb-4 transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Kembali ke Beranda
+    </a>
     <div class="flex flex-col md:flex-row gap-6">
         <aside class="w-full md:w-64 flex-shrink-0">
             <div class="bg-white rounded-xl border border-gray-200 p-5">
