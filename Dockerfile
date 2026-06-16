@@ -2,6 +2,7 @@ FROM php:8.2-fpm
 
 RUN apt-get update && apt-get install -y \
     nginx \
+    netcat-openbsd \
     libicu-dev \
     libzip-dev \
     libonig-dev \
@@ -47,4 +48,3 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 EXPOSE 80
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]

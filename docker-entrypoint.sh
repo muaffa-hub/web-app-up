@@ -43,4 +43,14 @@ EOF
 echo "Running migrations..."
 php /var/www/html/spark migrate --all -n || true
 
-exec "$@"
+echo "Starting PHP-FPM..."
+php-fpm &
+
+echo "Waiting for PHP-FPM to be ready..."
+until nc -z 127.0.0.1 9000; do
+    sleep 0.2
+done
+echo "PHP-FPM ready."
+
+echo "Starting Nginx..."
+exec nginx -g 'daemon off;'
