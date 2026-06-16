@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem C:\\\\xampp\\\\htdocs\\\\web-app\\\\app -Recurse -Force | Where-Object { !$_.PSIsContainer } | Select-Object FullName | Format-Table -AutoSize)",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -e \"SHOW DATABASES LIKE 'ecommerce_up';\" 2>&1)",
+      "PowerShell(php -r \"copy\\('https://getcomposer.org/installer', 'C:/Users/fikri/composer-setup.php'\\);\" 2>&1; php C:/Users/fikri/composer-setup.php --install-dir=C:/Users/fikri --filename=composer.phar 2>&1)",
+      "PowerShell($env:PATH += \";C:\\\\xampp\\\\php\"; Set-Location C:\\\\xampp\\\\htdocs\\\\web-app; php C:/Users/fikri/composer.phar install --no-interaction --prefer-source 2>&1)",
+      "PowerShell($env:PATH += \";C:\\\\xampp\\\\php\"; php -m 2>&1 | Select-String \"zip\")",
+      "PowerShell(Stop-Process *)",
+      "PowerShell($env:PATH += \";C:\\\\xampp\\\\php\"; Set-Location C:\\\\xampp\\\\htdocs\\\\web-app; php spark key:generate --force 2>&1)",
+      "PowerShell($env:PATH += \";C:\\\\xampp\\\\php\"; Set-Location C:\\\\xampp\\\\htdocs\\\\web-app; php spark migrate 2>&1)",
+      "PowerShell($env:PATH += \";C:\\\\xampp\\\\php\"; Set-Location C:\\\\xampp\\\\htdocs\\\\web-app; php spark db:seed InitSeeder 2>&1)",
+      "PowerShell(New-Item *)",
+      "PowerShell(\\(Get-Item \"C:\\\\xampp\\\\htdocs\\\\web-app\\\\public\\\\assets\\\\css\\\\style.css\"\\).Length / 1KB | ForEach-Object { \"{0:N1} KB\" -f $_ })",
+      "PowerShell($css = Get-Content \"C:\\\\xampp\\\\htdocs\\\\web-app\\\\public\\\\assets\\\\css\\\\style.css\" -Raw; @\\(\"aspect-square\",\"line-clamp-2\",\"divide-x\",\"from-indigo-600\",\"to-indigo-700\",\"bg-white\\\\/20\",\"backdrop-blur\"\\) | ForEach-Object { \"$_ : $\\(if \\($css -match [regex]::Escape\\($_\\)\\) {'YES'} else {'MISSING'}\\)\" })",
+      "Skill(run)",
+      "Bash(curl -s http://localhost/web-app/public/)",
+      "PowerShell(Test-Path *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\xampp\\\\htdocs\\\\web-app\\\\app\\\\Views\" -Recurse -Filter \"*.php\")",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(php spark *)",
+      "Bash(python *)"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+/vendor/
+/node_modules/
+.env
+/writable/cache/*
+/writable/logs/*
+/writable/session/*
+/writable/uploads/*
+!/writable/cache/.gitkeep
+!/writable/logs/.gitkeep
+!/writable/session/.gitkeep
+!/writable/uploads/.gitkeep
+composer-setup.php
+*.phar
+.DS_Store
+Thumbs.db
+/public/uploads/*
+!/public/uploads/.gitkeep

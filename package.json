@@ -1,0 +1,12 @@
+{
+  "name": "ecommerce-up",
+  "version": "1.0.0",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./public/assets/css/tailwind.input.css -o ./public/assets/css/style.css --minify",
+    "watch:css": "npx tailwindcss -i ./public/assets/css/tailwind.input.css -o ./public/assets/css/style.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "preline": "^2.0.3"
+  }
+}
