@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install intl mbstring mysqli pdo pdo_mysql zip \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN a2dismod mpm_event mpm_worker mpm_prefork 2>/dev/null || true \
+RUN rm -f /etc/apache2/mods-enabled/mpm_*.conf /etc/apache2/mods-enabled/mpm_*.load \
     && a2enmod mpm_prefork rewrite
 
 RUN { \
