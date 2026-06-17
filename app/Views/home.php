@@ -389,15 +389,18 @@
 <!-- CTA -->
 <section class="bg-orange-700 py-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-2xl md:text-3xl font-bold text-white mb-6">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">
             Siap Mulai Belanja?
         </h2>
+        <p class="text-orange-100 mb-8 mx-auto" style="max-width:34rem">
+            Pesan produk atau jasa print sekarang, bayar saat ambil di sekolah. Cepat, mudah, dan mendukung Unit Produksi.
+        </p>
 
         <?php if (!empty($store['jam_operasional']) || !empty($store['lokasi'])): ?>
-        <div style="display:inline-flex;flex-wrap:wrap;justify-content:center;background:rgba(255,255,255,0.13);border:1px solid rgba(255,255,255,0.22);border-radius:1.25rem;margin-bottom:2rem;overflow:hidden">
+        <div class="cta-info">
 
             <?php if (!empty($store['jam_operasional'])): ?>
-            <div style="display:flex;align-items:center;gap:0.875rem;padding:1.1rem 1.75rem">
+            <div class="cta-info-item" style="display:flex;align-items:center;gap:0.875rem;padding:1.1rem 1.75rem">
                 <div style="width:2.75rem;height:2.75rem;background:rgba(255,255,255,0.18);border-radius:0.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0">
                     <svg style="width:1.25rem;height:1.25rem" fill="none" stroke="#fff" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -411,11 +414,11 @@
             <?php endif; ?>
 
             <?php if (!empty($store['jam_operasional']) && !empty($store['lokasi'])): ?>
-            <div style="width:1px;background:rgba(255,255,255,0.2);margin:0.85rem 0;flex-shrink:0"></div>
+            <div class="cta-info-divider"></div>
             <?php endif; ?>
 
             <?php if (!empty($store['lokasi'])): ?>
-            <div style="display:flex;align-items:center;gap:0.875rem;padding:1.1rem 1.75rem">
+            <div class="cta-info-item" style="display:flex;align-items:center;gap:0.875rem;padding:1.1rem 1.75rem">
                 <div style="width:2.75rem;height:2.75rem;background:rgba(255,255,255,0.18);border-radius:0.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0">
                     <svg style="width:1.25rem;height:1.25rem" fill="none" stroke="#fff" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
@@ -522,6 +525,21 @@ window.fpCloseWelcome=function(){
 <?= $this->section('scripts') ?>
 <style>
 .hero-pad { padding-top: 4.5rem; padding-bottom: 4rem; }
+.cta-info {
+    display: inline-flex;
+    justify-content: center;
+    background: rgba(255,255,255,0.13);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 1.25rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+.cta-info-divider { width: 1px; background: rgba(255,255,255,0.2); margin: 0.85rem 0; flex-shrink: 0; }
+@media (max-width: 540px) {
+    .cta-info { flex-direction: column; width: 100%; }
+    .cta-info-item { justify-content: center; }
+    .cta-info-divider { width: auto; height: 1px; margin: 0 1.25rem; }
+}
 .hero-top {
     display: grid;
     grid-template-columns: 1fr 1fr;
