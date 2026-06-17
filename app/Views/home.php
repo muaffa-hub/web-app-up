@@ -28,55 +28,24 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative hero-pad" style="z-index:1">
 
-        <!-- Top: text + mascot -->
-        <div class="hero-top">
-
-            <div class="hero-text">
-                <!-- Badge -->
-                <div class="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 text-orange-600 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 tracking-widest uppercase">
-                    <img src="<?= base_url('assets/img/logo.png') ?>" alt="" style="height:1rem;width:1rem;object-fit:contain">
-                    Fikri Production
-                </div>
-
-                <!-- Headline -->
-                <h1 class="font-extrabold text-gray-900 leading-tight mb-4 border-b-4 border-orange-600 pb-2 hero-headline"
-                    style="font-size:clamp(1.625rem,5vw,3.25rem);letter-spacing:-0.025em">
-                    Dukung UMKM Sekolah Lewat
-                    <span class="text-orange-600">Unit Produksi SMK IT Ihsanul Fikri</span>
-                </h1>
-
-                <!-- Subtitle -->
-                <p class="text-gray-500 leading-relaxed mb-8 hero-subtitle"
-                   style="font-size:1.0625rem;max-width:32rem">
-                    Platform resmi Unit Produksi Fikri Production SMK IT Ihsanul Fikri untuk siswa, guru, dan staf. Pesan produk atau jasa print, bayar saat ambil.
-                </p>
-
-                <!-- CTA Buttons -->
-                <div class="flex flex-wrap gap-4 hero-cta">
-                    <a href="<?= base_url('/catalog') ?>"
-                       class="inline-flex items-center gap-2 bg-orange-600 text-white font-bold px-8 py-3.5 rounded-xl hover:bg-orange-700 transition-colors shadow-lg text-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
-                        </svg>
-                        Lihat Katalog
-                    </a>
-                    <a href="<?= base_url('/customer/print') ?>"
-                       class="inline-flex items-center gap-2 bg-white border-2 border-gray-300 text-gray-700 font-bold px-8 py-3.5 rounded-xl hover:border-orange-400 hover:text-orange-600 transition-colors text-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
-                        </svg>
-                        Jasa Print
-                    </a>
-                </div>
-            </div>
-
-            <!-- Mascot -->
-            <div class="hero-mascot-wrap">
-                <img src="<?= base_url('assets/img/mascot.png') ?>" alt="Maskot Fikri Production" class="hero-mascot hero-mascot--idle" aria-hidden="true">
-                <img src="<?= base_url('assets/img/mascot-hover.png') ?>" alt="" class="hero-mascot hero-mascot--hover" aria-hidden="true">
-            </div>
-
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 text-orange-600 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 tracking-widest uppercase">
+            <img src="<?= base_url('assets/img/logo.png') ?>" alt="" style="height:1rem;width:1rem;object-fit:contain">
+            Fikri Production
         </div>
+
+        <!-- Headline — max-width diperlebar agar teks muat 2 baris bersih -->
+        <h1 class="font-extrabold text-gray-900 leading-tight mb-4 mx-auto border-b-4 border-orange-600 pb-2"
+            style="font-size:clamp(1.625rem,5vw,3.25rem);letter-spacing:-0.025em;max-width:56rem">
+            Dukung UMKM Sekolah Lewat<br>
+            <span class="text-orange-600">Unit Produksi SMK IT Ihsanul Fikri</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-gray-500 leading-relaxed mx-auto mb-10"
+           style="font-size:1.0625rem;max-width:30rem">
+            Platform resmi Unit Produksi Fikri Production SMK IT Ihsanul Fikri untuk siswa, guru, dan staf. Pesan produk atau jasa print, bayar saat ambil.
+        </p>
 
         <!-- Product Fan – desktop (sm+) -->
         <div class="hero-fan-d">
@@ -182,6 +151,24 @@
                 </div>
             </div>
 
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="<?= base_url('/catalog') ?>"
+               class="inline-flex items-center gap-2 bg-orange-600 text-white font-bold px-8 py-3.5 rounded-xl hover:bg-orange-700 transition-colors shadow-lg text-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                </svg>
+                Lihat Katalog
+            </a>
+            <a href="<?= base_url('/customer/print') ?>"
+               class="inline-flex items-center gap-2 bg-white border-2 border-gray-300 text-gray-700 font-bold px-8 py-3.5 rounded-xl hover:border-orange-400 hover:text-orange-600 transition-colors text-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                </svg>
+                Jasa Print
+            </a>
         </div>
     </div>
 </section>
@@ -540,46 +527,6 @@ window.fpCloseWelcome=function(){
     .cta-info-item { justify-content: center; }
     .cta-info-divider { width: auto; height: 1px; margin: 0 1.25rem; }
 }
-.hero-top {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 2.5rem;
-    margin-bottom: 3rem;
-}
-.hero-text { text-align: left; }
-.hero-headline { max-width: 34rem; }
-.hero-cta { justify-content: flex-start; }
-.hero-mascot-wrap { position: relative; display: flex; justify-content: center; align-items: center; cursor: pointer; }
-.hero-mascot {
-    width: 100%;
-    max-width: 30rem;
-    height: auto;
-    filter: drop-shadow(0 18px 30px rgba(249,115,22,0.20));
-    animation: mascot-float 4.5s ease-in-out infinite;
-    transition: opacity 0.2s ease;
-}
-.hero-mascot--hover {
-    position: absolute;
-    inset: 0;
-    margin: auto;
-    opacity: 0;
-}
-.hero-mascot-wrap:hover .hero-mascot--idle { opacity: 0; }
-.hero-mascot-wrap:hover .hero-mascot--hover { opacity: 1; }
-@keyframes mascot-float {
-    0%,100% { transform: translateY(0) rotate(-2deg); }
-    50% { transform: translateY(-16px) rotate(2deg); }
-}
-@media (max-width: 1023px) {
-    .hero-top { grid-template-columns: 1fr; gap: 1.5rem; }
-    .hero-text { text-align: center; }
-    .hero-headline { max-width: 56rem; margin-left: auto; margin-right: auto; }
-    .hero-subtitle { margin-left: auto; margin-right: auto; }
-    .hero-cta { justify-content: center; }
-    .hero-mascot-wrap { order: -1; }
-    .hero-mascot { max-width: 16rem; }
-}
 .hero-fan-d { display: flex; align-items: flex-end; justify-content: center; gap: 0; overflow: visible; padding-bottom: 1.5rem; margin-bottom: 2.5rem; }
 .hero-fan-m { display: none; }
 
@@ -640,7 +587,6 @@ window.fpCloseWelcome=function(){
 
 @media (max-width: 639px) {
     .hero-pad { padding-top: 2.5rem; padding-bottom: 2rem; }
-    .hero-mascot { max-width: 12rem; }
     .hero-fan-d { display: none; }
     .hero-fan-m { display: flex; align-items: flex-end; justify-content: center; gap: 0; overflow: visible; padding-bottom: 1rem; margin-bottom: 1.75rem; }
 }
