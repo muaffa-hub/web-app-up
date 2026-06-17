@@ -72,7 +72,8 @@
 
             <!-- Mascot -->
             <div class="hero-mascot-wrap">
-                <img src="<?= base_url('assets/img/mascot.png') ?>" alt="Maskot Fikri Production" class="hero-mascot" aria-hidden="true">
+                <img src="<?= base_url('assets/img/mascot.png') ?>" alt="Maskot Fikri Production" class="hero-mascot hero-mascot--idle" aria-hidden="true">
+                <img src="<?= base_url('assets/img/mascot-hover.png') ?>" alt="" class="hero-mascot hero-mascot--hover" aria-hidden="true">
             </div>
 
         </div>
@@ -531,15 +532,23 @@ window.fpCloseWelcome=function(){
 .hero-text { text-align: left; }
 .hero-headline { max-width: 34rem; }
 .hero-cta { justify-content: flex-start; }
-.hero-mascot-wrap { display: flex; justify-content: center; align-items: center; }
+.hero-mascot-wrap { position: relative; display: flex; justify-content: center; align-items: center; cursor: pointer; }
 .hero-mascot {
     width: 100%;
     max-width: 30rem;
     height: auto;
-    pointer-events: none;
     filter: drop-shadow(0 18px 30px rgba(249,115,22,0.20));
     animation: mascot-float 4.5s ease-in-out infinite;
+    transition: opacity 0.2s ease;
 }
+.hero-mascot--hover {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    opacity: 0;
+}
+.hero-mascot-wrap:hover .hero-mascot--idle { opacity: 0; }
+.hero-mascot-wrap:hover .hero-mascot--hover { opacity: 1; }
 @keyframes mascot-float {
     0%,100% { transform: translateY(0) rotate(-2deg); }
     50% { transform: translateY(-16px) rotate(2deg); }
