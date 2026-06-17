@@ -4,13 +4,19 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\StoreInfoModel;
+use App\Libraries\GoogleDrive;
 
 class StoreInfoController extends BaseController
 {
     public function index()
     {
+        $drive = new GoogleDrive();
+
         return view('admin/store_info', [
-            'store' => (new StoreInfoModel())->getInfo(),
+            'store'           => (new StoreInfoModel())->getInfo(),
+            'driveConfigured' => $drive->isConfigured(),
+            'driveConnected'  => $drive->isConnected(),
+            'driveEmail'      => $drive->connectedEmail(),
         ]);
     }
 

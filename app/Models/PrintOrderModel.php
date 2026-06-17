@@ -10,7 +10,7 @@ class PrintOrderModel extends Model
     protected $primaryKey    = 'id';
     protected $useTimestamps = false;
     protected $allowedFields = [
-        'order_id', 'file_path', 'jenis_kertas', 'warna_opsi',
+        'order_id', 'file_path', 'drive_file_id', 'drive_url', 'backed_up_at', 'jenis_kertas', 'warna_opsi',
         'jumlah_halaman', 'jumlah_halaman_terverifikasi', 'total_copy', 'bolak_balik', 'total_harga',
     ];
 
@@ -27,6 +27,18 @@ class PrintOrderModel extends Model
             ->where('o.status_pesanan', 'selesai')
             ->where('o.updated_at <', date('Y-m-d H:i:s', strtotime('-72 hours')))
             ->where('po.file_path IS NOT NULL')
+            ->get()->getResultArray();
+    }
+
+    public function getFinishedForBackup(): array
+    {
+        return $this->db->table('print_orders po')
+            ->select('po.*, o.invoice_code')
+            ->join('orders o', 'o.id = po.order_id', 'left')
+            ->where('o.status_pesanan', 'selesai')
+            ->where('o.updated_at <', date('Y-m-d H:i:s', strtotime('-72 hours')))
+            ->where('po.file_path IS NOT NULL')
+            ->where('po.drive_file_id IS NULL')
             ->get()->getResultArray();
     }
 }

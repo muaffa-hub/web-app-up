@@ -78,6 +78,39 @@
     </form>
 </div>
 
+<div class="bg-white rounded-xl border border-gray-200 p-6 max-w-lg mt-6">
+    <div class="mb-5">
+        <h2 class="text-base font-bold text-gray-800 mb-1">Backup Dokumen ke Google Drive</h2>
+        <p class="text-sm text-gray-500">Dokumen print dari pesanan selesai &gt; 3 hari otomatis dibackup ke Google Drive lalu dihapus dari server. Tombol unduh akan diarahkan ke Drive.</p>
+    </div>
+
+    <?php if (!$driveConfigured): ?>
+    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm text-yellow-700">
+        Kredensial Google Drive belum diatur. Tambahkan <code class="bg-yellow-100 px-1 rounded">googledrive.clientId</code>, <code class="bg-yellow-100 px-1 rounded">googledrive.clientSecret</code>, dan <code class="bg-yellow-100 px-1 rounded">googledrive.folderId</code> di file <code class="bg-yellow-100 px-1 rounded">.env</code>, lalu muat ulang halaman ini.
+    </div>
+    <?php elseif ($driveConnected): ?>
+    <div class="flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2 text-sm">
+            <span class="inline-flex items-center gap-1.5 text-green-600 font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Terhubung
+            </span>
+            <?php if ($driveEmail): ?><span class="text-gray-500"><?= esc($driveEmail) ?></span><?php endif; ?>
+        </div>
+        <form action="<?= base_url('/admin/drive/disconnect') ?>" method="POST" onsubmit="return confirm('Putuskan koneksi Google Drive?')">
+            <?= csrf_field() ?>
+            <button type="submit" class="text-xs text-red-500 hover:text-red-700 border border-red-200 hover:border-red-400 px-3 py-1.5 rounded-lg transition">Putuskan</button>
+        </form>
+    </div>
+    <?php else: ?>
+    <a href="<?= base_url('/admin/drive/connect') ?>"
+       class="inline-flex items-center gap-2 bg-orange-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-orange-700">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        Hubungkan Google Drive
+    </a>
+    <?php endif; ?>
+</div>
+
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>

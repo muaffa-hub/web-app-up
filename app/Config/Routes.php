@@ -103,6 +103,10 @@ $routes->group('admin', ['filter' => 'auth:petugas'], function ($routes) {
     $routes->get('maintenance', 'Admin\MaintenanceController::index');
     $routes->post('maintenance/update', 'Admin\MaintenanceController::update');
 
+    $routes->get('drive/connect', 'Admin\DriveController::connect', ['filter' => 'auth:admin']);
+    $routes->get('drive/callback', 'Admin\DriveController::callback', ['filter' => 'auth:admin']);
+    $routes->post('drive/disconnect', 'Admin\DriveController::disconnect', ['filter' => 'auth:admin']);
+
     $routes->get('petugas', 'Admin\PetugasController::index');
     $routes->post('petugas/store', 'Admin\PetugasController::store');
     $routes->post('petugas/delete/(:num)', 'Admin\PetugasController::delete/$1');

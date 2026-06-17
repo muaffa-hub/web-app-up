@@ -82,18 +82,24 @@ class PrintAdminController extends BaseController
     {
         $printOrder = (new PrintOrderModel())->getByOrder($orderId);
 
-        if (!$printOrder || !$printOrder['file_path']) {
+        if (!$printOrder) {
             session()->setFlashdata('error', 'File tidak ditemukan.');
             return redirect()->to('/admin/print/' . $orderId);
         }
 
-        $filePath = WRITEPATH . 'uploads/documents/' . basename($printOrder['file_path']);
-        if (!file_exists($filePath)) {
-            session()->setFlashdata('error', 'File fisik tidak ditemukan di server.');
-            return redirect()->to('/admin/print/' . $orderId);
+        if ($printOrder['file_path']) {
+            $filePath = WRITEPATH . 'uploads/documents/' . basename($printOrder['file_path']);
+            if (file_exists($filePath)) {
+                return $this->response->download($filePath, null)->setFileName(basename($printOrder['file_path']));
+            }
         }
 
-        return $this->response->download($filePath, null)->setFileName(basename($printOrder['file_path']));
+        if (!empty($printOrder['drive_url'])) {
+            return redirect()->to($printOrder['drive_url']);
+        }
+
+        session()->setFlashdata('error', 'File fisik tidak ditemukan di server.');
+        return redirect()->to('/admin/print/' . $orderId);
     }
 
     private function sendVerificationEmail(array $order, array $printOrder, int $verified, float $newTotal): void
