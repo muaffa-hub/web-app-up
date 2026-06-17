@@ -107,6 +107,7 @@ $routes->group('admin', ['filter' => 'auth:petugas'], function ($routes) {
     $routes->post('petugas/store', 'Admin\PetugasController::store');
     $routes->post('petugas/delete/(:num)', 'Admin\PetugasController::delete/$1');
     $routes->post('petugas/reset-password/(:num)', 'Admin\PetugasController::resetPassword/$1');
+    $routes->post('petugas/change-role/(:num)', 'Admin\PetugasController::changeRole/$1', ['filter' => 'auth:admin']);
 
     $routes->get('notifications', 'Admin\DashboardController::notifications');
     $routes->post('notifications/read', 'Admin\DashboardController::markRead');

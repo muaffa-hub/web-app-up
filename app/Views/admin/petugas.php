@@ -51,6 +51,7 @@
                 <tr>
                     <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Nama</th>
                     <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Email</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Role</th>
                     <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Dibuat</th>
                     <th class="px-5 py-3"></th>
                 </tr>
@@ -58,8 +59,23 @@
             <tbody class="divide-y divide-gray-100">
                 <?php foreach ($list as $p): ?>
                 <tr class="hover:bg-gray-50" id="row-<?= esc($p['id']) ?>">
+                    <?php $isSelf = (int) session()->get('user_id') === (int) $p['id']; ?>
                     <td class="px-5 py-3 font-medium text-gray-800"><?= esc($p['nama']) ?></td>
                     <td class="px-5 py-3 text-gray-500"><?= esc($p['email']) ?></td>
+                    <td class="px-5 py-3">
+                        <?php if ($isSelf): ?>
+                        <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-full <?= $p['role'] === 'admin' ? 'bg-orange-100 text-orange-700' : 'bg-gray-100 text-gray-600' ?> capitalize"><?= esc($p['role']) ?></span>
+                        <?php else: ?>
+                        <form action="<?= base_url('/admin/petugas/change-role/' . esc($p['id'])) ?>" method="POST" class="inline">
+                            <?= csrf_field() ?>
+                            <select name="role" onchange="this.form.submit()"
+                                    class="text-xs border border-gray-300 rounded-lg px-2 py-1.5 capitalize focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <option value="petugas" <?= $p['role'] === 'petugas' ? 'selected' : '' ?>>Petugas</option>
+                                <option value="admin" <?= $p['role'] === 'admin' ? 'selected' : '' ?>>Admin</option>
+                            </select>
+                        </form>
+                        <?php endif; ?>
+                    </td>
                     <td class="px-5 py-3 text-gray-400"><?= date('d M Y', strtotime($p['created_at'])) ?></td>
                     <td class="px-5 py-3">
                         <div class="flex items-center justify-end gap-2">
@@ -67,6 +83,7 @@
                                     class="text-xs text-gray-500 hover:text-orange-600 border border-gray-200 hover:border-orange-300 px-3 py-1.5 rounded-lg transition">
                                 Reset Password
                             </button>
+                            <?php if (!$isSelf && $p['role'] === 'petugas'): ?>
                             <form action="<?= base_url('/admin/petugas/delete/' . esc($p['id'])) ?>" method="POST"
                                   onsubmit="return confirm('Hapus akun <?= esc(addslashes($p['nama'])) ?>?')">
                                 <?= csrf_field() ?>
@@ -74,6 +91,7 @@
                                     Hapus
                                 </button>
                             </form>
+                            <?php endif; ?>
                         </div>
                         <div id="reset-<?= esc($p['id']) ?>" class="hidden mt-2">
                             <form action="<?= base_url('/admin/petugas/reset-password/' . esc($p['id'])) ?>" method="POST" class="flex gap-2">
@@ -93,7 +111,7 @@
         <?php endif; ?>
     </div>
 
-    <p class="text-xs text-gray-400 mt-4">Petugas hanya dapat melihat dan memproses pesanan. Mereka tidak memiliki akses ke produk, laporan, atau pengaturan toko.</p>
+    <p class="text-xs text-gray-400 mt-4">Petugas hanya dapat melihat dan memproses pesanan. Admin memiliki akses penuh. Ubah role lewat dropdown untuk menaikkan petugas menjadi admin atau sebaliknya. Akun admin hanya dapat dihapus setelah diturunkan menjadi petugas.</p>
 </div>
 <?= $this->endSection() ?>
 

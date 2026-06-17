@@ -11,7 +11,7 @@ class PetugasController extends BaseController
     {
         return view('admin/petugas', [
             'list' => (new UserModel())
-                ->where('role', 'petugas')
+                ->whereIn('role', ['petugas', 'admin'])
                 ->where('deleted_at IS NULL')
                 ->orderBy('created_at', 'DESC')
                 ->findAll(),
@@ -57,12 +57,46 @@ class PetugasController extends BaseController
         return redirect()->to('/admin/petugas');
     }
 
+    public function changeRole(int $id)
+    {
+        $model = new UserModel();
+        $user  = $model->find($id);
+
+        if (!$user || !in_array($user['role'], ['petugas', 'admin'], true)) {
+            session()->setFlashdata('error', 'Akun tidak ditemukan.');
+            return redirect()->to('/admin/petugas');
+        }
+
+        if ((int) session()->get('user_id') === $id) {
+            session()->setFlashdata('error', 'Tidak dapat mengubah role akun sendiri.');
+            return redirect()->to('/admin/petugas');
+        }
+
+        $role = $this->request->getPost('role');
+        if (!in_array($role, ['petugas', 'admin'], true)) {
+            session()->setFlashdata('error', 'Role tidak valid.');
+            return redirect()->to('/admin/petugas');
+        }
+
+        if ($user['role'] === 'admin' && $role !== 'admin') {
+            $adminCount = $model->where('role', 'admin')->where('deleted_at IS NULL')->countAllResults();
+            if ($adminCount <= 1) {
+                session()->setFlashdata('error', 'Minimal harus ada satu admin.');
+                return redirect()->to('/admin/petugas');
+            }
+        }
+
+        $model->update($id, ['role' => $role]);
+        session()->setFlashdata('success', 'Role akun berhasil diperbarui.');
+        return redirect()->to('/admin/petugas');
+    }
+
     public function resetPassword(int $id)
     {
         $model = new UserModel();
         $user  = $model->find($id);
 
-        if (!$user || $user['role'] !== 'petugas') {
+        if (!$user || !in_array($user['role'], ['petugas', 'admin'], true)) {
             session()->setFlashdata('error', 'Akun tidak ditemukan.');
             return redirect()->to('/admin/petugas');
         }
