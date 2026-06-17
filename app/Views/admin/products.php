@@ -32,7 +32,7 @@
                                 <span style="width:6px;height:6px;border-radius:9999px;background:#16a34a;display:inline-block"></span>Tampil
                             </span>
                         <?php else: ?>
-                            <span style="display:inline-flex;align-items:center;gap:4px;font-size:0.7rem;font-weight:600;padding:2px 10px;border-radius:9999px;background:#f3f4f6;color:#6b7280">
+                            <span class="bg-gray-100 text-gray-500" style="display:inline-flex;align-items:center;gap:4px;font-size:0.7rem;font-weight:600;padding:2px 10px;border-radius:9999px">
                                 <span style="width:6px;height:6px;border-radius:9999px;background:#9ca3af;display:inline-block"></span>Tersembunyi
                             </span>
                         <?php endif; ?>

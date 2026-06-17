@@ -22,11 +22,11 @@ $since = !empty($user['created_at']) ? date('d M Y', strtotime($user['created_at
             </div>
             <div style="flex:1;min-width:0">
                 <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
-                    <h1 style="font-size:1.125rem;font-weight:700;color:#111827;margin:0;line-height:1.3"><?= esc($user['nama']) ?></h1>
+                    <h1 class="text-gray-900" style="font-size:1.125rem;font-weight:700;margin:0;line-height:1.3"><?= esc($user['nama']) ?></h1>
                     <span style="font-size:.7rem;font-weight:600;background:#ffedd5;color:#c2410c;padding:2px 10px;border-radius:999px;white-space:nowrap"><?= esc($roleLabel) ?></span>
                 </div>
-                <div style="font-size:.875rem;color:#6b7280;margin-top:.35rem"><?= esc($user['email']) ?></div>
-                <div style="font-size:.75rem;color:#9ca3af;margin-top:.15rem">Bergabung <?= esc($since) ?></div>
+                <div class="text-gray-500" style="font-size:.875rem;margin-top:.35rem"><?= esc($user['email']) ?></div>
+                <div class="text-gray-400" style="font-size:.75rem;margin-top:.15rem">Bergabung <?= esc($since) ?></div>
             </div>
         </div>
     </div>
@@ -39,8 +39,8 @@ $since = !empty($user['created_at']) ? date('d M Y', strtotime($user['created_at
                     <svg style="width:1rem;height:1rem;color:#3b82f6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                 </div>
                 <div>
-                    <div style="font-size:.875rem;font-weight:700;color:#1f2937">Ubah Email</div>
-                    <div style="font-size:.75rem;color:#9ca3af">Perlu konfirmasi password</div>
+                    <div class="text-gray-800" style="font-size:.875rem;font-weight:700">Ubah Email</div>
+                    <div class="text-gray-400" style="font-size:.75rem">Perlu konfirmasi password</div>
                 </div>
             </div>
             <form action="<?= base_url('/admin/profile/update-email') ?>" method="POST" style="display:flex;flex-direction:column;flex:1;gap:1rem">
@@ -80,8 +80,8 @@ $since = !empty($user['created_at']) ? date('d M Y', strtotime($user['created_at
                     <svg style="width:1rem;height:1rem;color:#f97316" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                 </div>
                 <div>
-                    <div style="font-size:.875rem;font-weight:700;color:#1f2937">Ubah Password</div>
-                    <div style="font-size:.75rem;color:#9ca3af">Minimal 8 karakter</div>
+                    <div class="text-gray-800" style="font-size:.875rem;font-weight:700">Ubah Password</div>
+                    <div class="text-gray-400" style="font-size:.75rem">Minimal 8 karakter</div>
                 </div>
             </div>
             <form action="<?= base_url('/admin/profile/update-password') ?>" method="POST" style="display:flex;flex-direction:column;flex:1;gap:1rem">

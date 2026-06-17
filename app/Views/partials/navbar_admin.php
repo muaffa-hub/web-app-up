@@ -40,7 +40,7 @@ $initials   = strtoupper(substr($words[0] ?? '', 0, 1) . substr($words[1] ?? '',
 
             <div id="ap-drop" class="hidden bg-white rounded-xl border border-gray-100 overflow-hidden"
                  style="position:absolute;right:0;top:calc(100% + 6px);width:13rem;box-shadow:0 10px 25px rgba(0,0,0,.1);z-index:50">
-                <div style="padding:.75rem 1rem;border-bottom:1px solid #f3f4f6;background:#f9fafb">
+                <div class="bg-gray-50 border-b border-gray-100" style="padding:.75rem 1rem">
                     <div class="text-xs font-semibold text-gray-800 truncate"><?= esc(session()->get('nama')) ?></div>
                     <div class="text-xs text-gray-500 truncate"><?= esc(session()->get('email')) ?></div>
                 </div>
@@ -58,7 +58,7 @@ $initials   = strtoupper(substr($words[0] ?? '', 0, 1) . substr($words[1] ?? '',
                         Lihat Toko
                     </a>
                 </div>
-                <div style="border-top:1px solid #f3f4f6;padding:.25rem 0">
+                <div class="border-t border-gray-100" style="padding:.25rem 0">
                     <a href="<?= base_url('/logout') ?>"
                        class="flex items-center text-sm text-red-600 hover:bg-red-50"
                        style="gap:.625rem;padding:.5rem 1rem">

@@ -17,6 +17,8 @@
     .adm-main::-webkit-scrollbar-track{background:#f3f4f6;border-radius:3px}
     .adm-main::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
     .adm-main::-webkit-scrollbar-thumb:hover{background:#f97316}
+    .dark .adm-main::-webkit-scrollbar-track{background:#0f172a}
+    .dark .adm-main::-webkit-scrollbar-thumb{background:#334155}
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen">
