@@ -28,6 +28,9 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative hero-pad" style="z-index:1">
 
+        <!-- Mascot -->
+        <img src="<?= base_url('assets/img/mascot.png') ?>" alt="Maskot Fikri Production" class="hero-mascot" aria-hidden="true">
+
         <!-- Badge -->
         <div class="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 text-orange-600 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 tracking-widest uppercase">
             <img src="<?= base_url('assets/img/logo.png') ?>" alt="" style="height:1rem;width:1rem;object-fit:contain">
@@ -509,6 +512,21 @@ window.fpCloseWelcome=function(){
 <?= $this->section('scripts') ?>
 <style>
 .hero-pad { padding-top: 4.5rem; padding-bottom: 4rem; }
+.hero-mascot {
+    position: absolute;
+    top: 1rem;
+    right: 2.5rem;
+    width: 9rem;
+    height: auto;
+    z-index: 2;
+    pointer-events: none;
+    filter: drop-shadow(0 12px 20px rgba(249,115,22,0.18));
+    animation: mascot-float 4.5s ease-in-out infinite;
+}
+@keyframes mascot-float {
+    0%,100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-14px) rotate(2deg); }
+}
 .hero-fan-d { display: flex; align-items: flex-end; justify-content: center; gap: 0; overflow: visible; padding-bottom: 1.5rem; margin-bottom: 2.5rem; }
 .hero-fan-m { display: none; }
 
@@ -569,6 +587,7 @@ window.fpCloseWelcome=function(){
 
 @media (max-width: 639px) {
     .hero-pad { padding-top: 2.5rem; padding-bottom: 2rem; }
+    .hero-mascot { width: 5rem; top: 0; right: 0.5rem; }
     .hero-fan-d { display: none; }
     .hero-fan-m { display: flex; align-items: flex-end; justify-content: center; gap: 0; overflow: visible; padding-bottom: 1rem; margin-bottom: 1.75rem; }
 }
